@@ -3,19 +3,31 @@ import { Container, InputBinary, DecimalOutput, PageTitle } from '../style/compo
 
 //export default class MainContainer extends Component {
 function MainContainer() {
-    //render() {
-/*
-101
 
-*/
         const[dec, setDec] = useState('')
+
+        function reverseArray(input) {
+            let newArray = []
+
+            for(let i = input.length - 1; i >= 0; i--) {
+                newArray.push(input[i])
+            }
+
+            return newArray
+        }
 
         function handleConvert(props) {
 
             let dec = 0
 
-            for(let i = 0; i < props.length; i++) {
-                dec += props[i] * (Math.pow(2, i))
+            let newArray = reverseArray(props)
+
+            for(let i = newArray.length - 1; i >= 0; i--) {
+                if (newArray[i] == 0 || newArray[i] == 1) {
+                    dec += newArray[i] * (Math.pow(2, i))
+                }else {
+                    return 'INVALID NUMBER'
+                }
             }
             
             return dec
